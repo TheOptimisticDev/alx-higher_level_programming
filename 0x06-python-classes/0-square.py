@@ -1,3 +1,6 @@
 #!/usr/bin/python3
-class Square:
-    pass
+class Employee: pass
+
+def foo(self): pass
+
+Employee.foo = foo
