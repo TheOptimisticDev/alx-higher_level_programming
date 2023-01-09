@@ -8,17 +8,22 @@ class Rectangle:
     Rectangle functions and data
     """
 
+    # Public
+    number_of_instances = 0
+    print_symbol = "#"
+
     def __init__(self, width=0, height=0):
         """ Instantiation
         """
         self.width = width
         self.height = height
+        Rectangle.number_of_instances += 1
 
     @property
-    def width(self)
-    """ Getter for width
-    """
-    return self.__width
+    def width(self):
+        """ Getter for width
+        """
+        return self.__width
 
     @width.setter
     def width(self, value):
@@ -68,8 +73,25 @@ class Rectangle:
             return res
 
         for i in range(self.__height):
-            if i == self.__height - 1:
-                res += ('#' * self.__width)
-            else:
-                res += (('#' * self.__width) + '\n')
-            return res
+            for i2 in range(self.__width):
+                res += str(self.print_symbol)
+            if i != self.__height - 1:
+                res += '\n'
+        return res
+
+    def __repr__(self):
+        """ print() or eval() __repr__ method function to return
+        ... Rectangle(width, height)
+        """
+        w = str(self.__width)
+        h = str(self.__height)
+
+        res = "Rectangle(" + w + ", " + h + ")"
+        return res
+
+    def __del__(self):
+        """ Print a message for del
+        Decrement instance when del is called
+        """
+        print("Bye rectangle...")
+        Rectangle.number_of_instances -= 1
