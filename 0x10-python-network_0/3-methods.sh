@@ -1,4 +1,3 @@
 #!/bin/bash
-# This script displays the HTTP methods allowed by the server
-curl -sI "$1" -X OPTIONS | grep -oP "(?<=(^Allow:\s))(\w.*)$"
-
+# Display all HTTP methods the server of a given URL will accept.
+curl -sI "$1" | grep "Allow" | cut -d " " -f 2-
