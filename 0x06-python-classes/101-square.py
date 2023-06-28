@@ -1,88 +1,89 @@
 #!/usr/bin/python3
-"""
-Create a Class Square with:
-- size, position private propreties
-- method of area and method of print_square
-- getters & setters.
-"""
+"""Module containing the Square class"""
 
 
 class Square:
-    """Class - Square"""
-
+    """The Square class"""
     def __init__(self, size=0, position=(0, 0)):
-        """Constructor of a Square with the size and position"""
-        if (type(size) is not int):
-            raise (TypeError("size must be an integer"))
-        elif (size < 0):
-            raise (ValueError("size must be >= 0"))
-        else:
-            self.__size = size
-
-        if (len(position) != 2) or (type(position) is not tuple)\
-                or (type(position[0]) is not int)\
-                or (type(position[1]) is not int)\
-                or (position[0] < 0) or (position[1] < 0):
-            raise TypeError("position must be a tuple of 2 positive integers")
-        else:
-            self.__position = position
-
-    def area(self):
-        """Method to get the area of the Square"""
-        return (self.__size ** 2)
-
-    def my_print(self):
-        """Method to print a Square with spaces"""
-        if (self.__size == 0):
-            print()
-        else:
-            for blank in range(self.position[1]):
-                print()
-            for rows in range(self.__size):
-                print(" " * self.position[0], end='')
-                print("#" * self.__size)
+        """Initializing an instance of Square
+        Args:
+            size (int): The size of the Square instance. Default value is 0.
+            position (:obj:'tuple' of int): x, y coordinate offset when
+                printing the square.
+        """
+        self.size = size
+        self.position = position
 
     def __str__(self):
-        str = ""
-        if (self.__size == 0):
-            return str
-        else:
-            for blank in range(self.position[1]):
-                str += "\n"
-            for rows in range(self.__size):
-                str += (" " * self.position[0])
-                str += ("#" * self.__size)
-                if (rows != self.__size - 1):
-                    str += "\n"
-        return (str)
+        """Returns a string consisting of a square made with hashtags using the
+        'size'. Uses 'position' to offset where the printing should begin. The
+        x, y coordinate in 'position' is the location of the top left corner of
+        the square.
+        Returns:
+            str: A string representing a square made of hashtags.
+        """
+        __my_string = ""
+        if self.__size is not 0:
+            for y in range(self.__position[1]):
+                __my_string += '\n'
+            for i in range(self.__size):
+                for x in range(self.__position[0]):
+                    __my_string += ' '
+                for j in range(self.__size):
+                    __my_string += '#'
+                if i is not self.__size - 1:
+                    __my_string += '\n'
+        return __my_string
 
     @property
     def size(self):
-        """Getter of the private attribute size"""
-        return (self.__size)
+        """int: Value of 'size'"""
+        return self.__size
 
     @size.setter
-    def size(self, value):
-        """Setter for the size private attribute"""
-        if (type(value) is not int):
-            raise (TypeError("size must be an integer"))
-        elif (value < 0):
-            raise (ValueError("size must be >= 0"))
-        else:
-            self.__size = value
+    def size(self, size):
+        if not isinstance(size, int):
+            raise TypeError("size must be an integer")
+        if size < 0:
+            raise ValueError("size must be >= 0")
+
+        self.__size = size
 
     @property
     def position(self):
-        """Getter of Position"""
-        return (self.__position)
+        """:obj:'tuple' of int: x, y coordinate offset when printing the square.
+        """
+        return self.__position
 
     @position.setter
-    def position(self, value):
-        """Setter of position"""
-        if (len(value) != 2) or (type(value) is not tuple) \
-                or (type(value[0]) is not int) \
-                or (type(value[1]) is not int) \
-                or (value[0] < 0) or (value[1] < 0):
+    def position(self, position):
+        if (not isinstance(position, tuple) or len(position) is not 2 or
+            not isinstance(position[0], int) or
+                not isinstance(position[1], int) or position[0] < 0 or
+                position[1] < 0):
             raise TypeError("position must be a tuple of 2 positive integers")
+
+        self.__position = position
+
+    def area(self):
+        """Returns the current square area of the instance
+        Returns:
+            int: Value of 'size'
+        """
+        return self.__size ** 2
+
+    def my_print(self):
+        """Prints a square with hashtags using the 'size'. Uses 'position' to
+        offset where the printing should begin. The x, y coordinate in
+        'position' is the location of the top left corner of the square."""
+        if self.__size is not 0:
+            for y in range(self.__position[1]):
+                print()
+            for i in range(self.__size):
+                for x in range(self.__position[0]):
+                    print(" ", end="")
+                for j in range(self.__size):
+                    print("#", end="")
+                print()
         else:
-            self.__position = 
+            print()
